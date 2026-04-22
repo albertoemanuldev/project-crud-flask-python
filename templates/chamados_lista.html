@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Helpdesk - Chamados{% endblock %}
+
+{% block content %}
+<div class="helpdesk-container">
+    <header class="header-text" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1>Central de Chamados</h1>
+            <p>Gerencie suas solicitações de suporte</p>
+        </div>
+        <a href="/chamados/novo" class="btn success">+ Abrir Novo Chamado</a>
+    </header>
+
+    <section class="card">
+        <form style="display: flex; gap: 15px; align-items: flex-end;">
+            <div style="flex: 1;">
+                <label class="form-group" style="display:block; margin-bottom:5px;">Status</label>
+                <select class="form-control">
+                    <option value="">Todos os Status</option>
+                    <option value="aberto">Aberto</option>
+                    <option value="em_atendimento">Em Atendimento</option>
+                    <option value="resolvido">Resolvido</option>
+                </select>
+            </div>
+            <div style="flex: 1;">
+                <label class="form-group" style="display:block; margin-bottom:5px;">Prioridade</label>
+                <select class="form-control">
+                    <option value="">Todas as Prioridades</option>
+                    <option value="alta">Alta</option>
+                    <option value="critica">Crítica</option>
+                </select>
+            </div>
+            <button type="button" class="btn primary">Filtrar</button>
+        </form>
+    </section>
+
+    <main class="card" style="padding: 0; overflow: hidden;">
+        <table class="chamados-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#1024</td>
+                    <td>
+                        <strong>Erro no acesso ao sistema</strong><br>
+                        <small style="color: #6b7280;">Solicitante: 123.456.789-00</small>
+                    </td>
+                    <td><span class="badge prio-critica">Crítica</span></td>
+                    <td><span class="badge status-em_atendimento">Em Atendimento</span></td>
+                    <td>22/04/2026</td>
+                    <td>
+                        <a href="/chamados/1024" class="btn primary" style="padding: 6px 12px; font-size: 14px;">Ver</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+{% endblock %}

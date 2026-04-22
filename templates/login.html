@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Acesso ao Sistema</h1>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="flash {{ categoria }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('auth.login') }}" method="POST">
+
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" required>
+
+            <label for="senha">Senha</label>
+            <div class="password-field">
+                <input type="password" id="senha" name="senha" required />
+                <span id="toggleSenha" class="toggle-password" title="Mostrar senha">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                         viewBox="0 0 24 24" fill="none"
+                         stroke="#374151" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </span>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+        </form>
+
+        <div class="link-area">
+            <a href="{{ url_for('auth.home') }}">Voltar para início</a>
+        </div>
+
+    </div>
+
+     <script>
+        const senhaInput = document.getElementById('senha');
+        const toggle = document.getElementById('toggleSenha');
+        const eyeIcon = toggle.querySelector('svg');
+
+        toggle.addEventListener('click', function () {
+            const visible = senhaInput.type === 'text';
+            senhaInput.type = visible ? 'password' : 'text';
+            eyeIcon.setAttribute('stroke', visible ? '#374151' : '#2563eb');
+        });
+    </script>
+</body>
+</html>

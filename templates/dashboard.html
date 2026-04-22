@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema Integrado{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <header class="welcome-header">
+        <h1>Visão Geral do Sistema</h1>
+        <p style="color: #9ca3af;">Bem-vindo ao painel de controle administrativo.</p>
+    </header>
+
+    <!-- KPI Grid -->
+    <section class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-title">Total de Usuários</div>
+            <div class="kpi-value text-blue">{{ total_usuarios }}</div>
+            <div class="kpi-sub text-green">▲ Ativos no sistema</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Chamados Abertos</div>
+            <div class="kpi-value text-yellow">{{ total_chamados_abertos }}</div>
+            <div class="kpi-sub" style="color: #9ca3af;">Aguardando atendimento</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Chamados Resolvidos</div>
+            <div class="kpi-value text-green">{{ total_chamados_resolvidos }}</div>
+            <div class="kpi-sub" style="color: #9ca3af;">Concluídos este mês</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-title">Taxa de Resolução</div>
+            <div class="kpi-value">85%</div>
+            <div class="kpi-sub text-blue">Meta: 90%</div>
+        </div>
+    </section>
+
+    <!-- Content Panels -->
+    <div class="content-grid">
+        <div class="data-panel">
+            <div class="panel-header">
+                <h3>Chamados por Categoria</h3>
+            </div>
+            <ul class="data-list">
+                <li class="data-item"><span>Infraestrutura</span><span class="text-blue">12</span></li>
+                <li class="data-item"><span>Sistemas</span><span class="text-blue">08</span></li>
+                <li class="data-item"><span>Acessos</span><span class="text-blue">15</span></li>
+                <li class="data-item"><span>Outros</span><span class="text-blue">03</span></li>
+            </ul>
+        </div>
+
+        <div class="data-panel">
+            <div class="panel-header">
+                <h3>Distribuição de Perfis</h3>
+            </div>
+            <ul class="data-list">
+                <li class="data-item"><span>Administradores</span><span class="text-green">05</span></li>
+                <li class="data-item"><span>Usuários Comuns</span><span class="text-green">{{ total_usuarios - 5 if total_usuarios > 5 else 0 }}</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

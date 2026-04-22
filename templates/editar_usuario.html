@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Usuário{% endblock %}
+
+{% block content %}
+<div class="helpdesk-container">
+    <header class="header-text">
+        <a href="{{ url_for('usuario.listar_usuarios') }}" style="color: #60a5fa; text-decoration: none;">← Voltar para a lista</a>
+        <h1 style="margin-top: 15px; color: white;">Editar Usuário</h1>
+    </header>
+
+    <main>
+        <form action="{{ url_for('usuario.editar_usuario', cpf=usuario.cpf) }}" method="POST" class="form-chamado">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" class="form-control" value="{{ usuario.nome }}" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" value="{{ usuario.email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" name="idade" class="form-control" value="{{ usuario.idade }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="perfil">Perfil de Acesso</label>
+                <select id="perfil" name="perfil" class="form-control">
+                    <option value="comum" {{ 'selected' if usuario.perfil == 'comum' else '' }}>Comum</option>
+                    <option value="admin" {{ 'selected' if usuario.perfil == 'admin' else '' }}>Administrador</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 10px;">
+                <a href="{{ url_for('usuario.listar_usuarios') }}" class="btn secondary">Cancelar</a>
+                <button type="submit" class="btn success">Salvar Alterações</button>
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock %}

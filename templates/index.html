@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Sistema de Cadastro</h1>
+
+        <div class="buttons">
+
+            <a href="{{ url_for('auth.login') }}" class="btn primary">
+                Acessar Login
+            </a>
+
+            <a href="{{ url_for('auth.cadastrar_usuario') }}" class="btn success">
+                Realizar Cadastro
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

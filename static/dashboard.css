@@ -1,0 +1,166 @@
+/* static/dashboard.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f2937, #111827);
+    color: #f3f4f6;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: #d1d5db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    color: #3b82f6;
+}
+
+.user-info {
+    color: #d1d5db;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-logout {
+    color: #ef4444;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #ef4444;
+    padding: 5px 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background: #ef4444;
+    color: white;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.welcome-header {
+    margin-bottom: 40px;
+}
+
+.welcome-header h1 {
+    font-size: 28px;
+    color: white;
+}
+
+/* Grid de Indicadores (KPI Cards) */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.kpi-card {
+    background: rgba(31, 41, 55, 0.7);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.kpi-title {
+    color: #f7f7f8;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.kpi-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+.kpi-sub {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.text-blue { color: #3b82f6; }
+.text-green { color: #10b981; }
+.text-yellow { color: #f59e0b; }
+.text-red { color: #ef4444; }
+
+/* Seção de Gráficos/Tabelas */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.data-panel {
+    background: rgba(31, 41, 55, 0.5);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Mini lista para o painel */
+.data-list {
+    list-style: none;
+    color: #d1d5db;
+}
+
+.data-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-item:last-child {
+    border-bottom: none;
+}

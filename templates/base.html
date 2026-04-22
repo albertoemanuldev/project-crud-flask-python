@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema Integrado{% endblock %}</title>
+    <!-- CSS unificado baseado no dashboard e helpdesk -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='helpdesk.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% if session.usuario_id %}
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-item"><strong>Dashboard</strong></a>
+            <a href="{{ url_for('usuario.listar_usuarios') }}" class="nav-item">Gerenciar Usuários</a>
+            <a href="/chamados" class="nav-item">Helpdesk</a>
+        </div>
+        
+        <div class="user-info">
+            <span>Olá, <strong>{{ session.usuario_nome }}</strong></span>
+            <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 10px; border-radius: 6px; font-size: 12px;">
+                {{ session.usuario_perfil }}
+            </span>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sair</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="container-principal">
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                <div style="max-width: 1200px; margin: 20px auto; padding: 0 20px;">
+                    {% for categoria, mensagem in mensagens %}
+                        <div class="badge {{ 'status-resolvido' if categoria == 'sucesso' else 'prio-critica' }}" 
+                             style="width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 8px; text-transform: none;">
+                            {{ mensagem }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

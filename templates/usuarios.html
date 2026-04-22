@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Usuários{% endblock %}
+
+{% block content %}
+<div class="helpdesk-container"> <!-- Usando o container do helpdesk para manter largura -->
+    <header class="header-text">
+        <h1>Usuários Cadastrados</h1>
+        <p>Total de usuários no sistema: <strong>{{ total }}</strong></p>
+    </header>
+
+    <!-- Busca e Filtros -->
+    <section class="card" style="margin-bottom: 20px;">
+        <form method="GET" action="{{ url_for('usuario.listar_usuarios') }}" style="display: flex; gap: 10px;">
+            <input type="text" name="q" class="form-control" placeholder="Buscar por nome ou CPF..." value="{{ busca }}">
+            <input type="hidden" name="ordem" value="{{ ordem }}">
+            <button type="submit" class="btn primary">Buscar</button>
+            {% if busca %}
+                <a href="{{ url_for('usuario.listar_usuarios', ordem=ordem) }}" class="btn secondary">Limpar</a>
+            {% endif %}
+        </form>
+    </section>
+
+    <!-- Tabela -->
+    <main class="card" style="padding: 0; overflow: hidden;">
+        <table class="chamados-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Perfil</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td><strong>{{ usuario.nome }}</strong><br><small>{{ usuario.idade }} anos</small></td>
+                    <td>{{ usuario.cpf }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>
+                        <span class="badge {{ 'status-aberto' if usuario.perfil == 'admin' else 'status-fechado' }}">
+                            {{ usuario.perfil or 'comum' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 5px;">
+                            {% if session.usuario_perfil == 'admin' or session.usuario_id == usuario.id %}
+                                <a href="{{ url_for('usuario.editar_usuario', cpf=usuario.cpf) }}" class="btn primary" style="padding: 5px 10px; font-size: 12px;">Editar</a>
+                            {% endif %}
+                            
+                            {% if session.usuario_perfil == 'admin' %}
+                                <form action="{{ url_for('usuario.deletar_usuario') }}" method="post" onsubmit="return confirm('Deletar usuário?');">
+                                    <input type="hidden" name="cpf" value="{{ usuario.cpf }}" />
+                                    <button type="submit" class="btn secondary" style="padding: 5px 10px; font-size: 12px; background: #ef4444;">Excluir</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</div>
+{% endblock %}

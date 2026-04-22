@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Chamado{% endblock %}
+
+{% block content %}
+<div class="helpdesk-container">
+    <header class="header-text">
+        <a href="/chamados" style="color: #60a5fa; text-decoration: none;">← Voltar para a lista</a>
+        <h1 style="margin-top: 15px; color: white;">Abrir Novo Chamado</h1>
+    </header>
+
+    <main>
+        <form class="form-chamado">
+            <div class="form-group">
+                <label for="titulo">Título do Problema</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ex: Erro ao carregar relatório" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" class="form-control">
+                        <option value="infra">Infraestrutura</option>
+                        <option value="sistema">Sistema</option>
+                        <option value="acesso">Acesso</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prioridade">Prioridade</label>
+                    <select id="prioridade" name="prioridade" class="form-control">
+                        <option value="baixa">Baixa</option>
+                        <option value="media">Média</option>
+                        <option value="alta">Alta</option>
+                        <option value="critica">Crítica</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">Descrição Detalhada</label>
+                <textarea id="descricao" name="descricao" class="form-control" rows="5" placeholder="Descreva o problema com detalhes..." required></textarea>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 10px;">
+                <a href="/chamados" class="btn secondary">Cancelar</a>
+                <button type="submit" class="btn success">Enviar Chamado</button>
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock %}

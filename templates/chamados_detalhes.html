@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Detalhes do Chamado{% endblock %}
+
+{% block content %}
+<div class="helpdesk-container">
+    <header class="header-text">
+        <a href="/chamados" style="color: #60a5fa; text-decoration: none;">← Voltar para a lista</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+            <h1 style="color: white; margin-bottom: 0;">Chamado #1024</h1>
+            <span class="badge status-em_atendimento" style="font-size: 14px; padding: 8px 16px;">Em Atendimento</span>
+        </div>
+    </header>
+
+    <div class="detalhes-grid">
+        <main>
+            <section class="card">
+                <h2>Erro no acesso ao sistema</h2>
+                <p style="color: #4b5563; line-height: 1.6;">O usuário não consegue realizar o login após a última atualização do módulo financeiro.</p>
+            </section>
+
+            <section>
+                <h3 style="color: white; margin-bottom: 15px;">Comentários</h3>
+                <div class="card-comentario">
+                    <div class="comentario-meta"><strong>Suporte Técnico</strong> • 22/04/2026 10:30</div>
+                    <p>Verificando os logs do servidor.</p>
+                </div>
+
+                <div class="card" style="margin-top: 25px;">
+                    <h3>Responder</h3>
+                    <form>
+                        <textarea class="form-control" rows="4" placeholder="Escreva sua resposta..."></textarea>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <label style="font-size: 14px; color: #6b7280;">
+                                <input type="checkbox"> Comentário Interno
+                            </label>
+                            <button type="submit" class="btn success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <aside>
+            <section class="card">
+                <h3>Informações</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+                    <div><strong>Categoria:</strong> Acesso</div>
+                    <div><strong>Prioridade:</strong> <span class="badge prio-critica">Crítica</span></div>
+                    <div><strong>Solicitante:</strong> 123.456.789-00</div>
+                    <hr style="border: 0; border-top: 1px solid #e5e7eb;">
+                    <h4>Ações</h4>
+                    <select class="form-control">
+                        <option>Mudar Status...</option>
+                        <option value="resolvido">Resolvido</option>
+                        <option value="fechado">Fechado</option>
+                    </select>
+                    <button class="btn primary" style="width: 100%; margin-top: 10px;">Atualizar</button>
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>
+{% endblock %}

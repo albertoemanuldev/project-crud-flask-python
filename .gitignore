@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Configurações e Segurança
+.env
+.env.example
+@api.md
+
+# Banco de Dados (Arquivos Locais)
+usuarios.json
+
+# IDEs
+.vscode/
+.idea/

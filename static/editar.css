@@ -1,0 +1,115 @@
+/* ==========================
+   RESET (mesmo padrão)
+========================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f2937, #111827);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #111827;
+    font-size: 22px;
+}
+
+/* ==========================
+   FORMULÁRIO
+========================== */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: 0.2s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Salvar */
+.btn-salvar {
+    flex: 1;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-salvar:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* Cancelar */
+.btn-voltar {
+    flex: 1;
+    background-color: #6b7280;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-voltar:hover {
+    background-color: #4b5563;
+    transform: translateY(-2px);
+}
