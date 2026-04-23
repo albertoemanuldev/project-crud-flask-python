@@ -6,9 +6,11 @@ Documentação completa para implementação do módulo de Chamados/Helpdesk sob
 
 ## Visão geral
 
-O módulo de Helpdesk adiciona um domínio de **chamados de suporte** ao sistema existente. Usuários comuns abrem chamados e acompanham o atendimento. Administradores recebem, atribuem, respondem e encerram os chamados.
+O módulo de Helpdesk adiciona um domínio de **chamados de suporte** ao sistema existente. 
+- **Usuários Comuns:** Abrem chamados e acompanham o atendimento via Dashboard.
+- **Administradores:** Gerenciam todos os chamados, atribuem responsáveis e atualizam o status.
 
-O diferencial didático deste domínio é a **máquina de estados** — um chamado percorre um ciclo de vida bem definido, e a API precisa enforçar quais transições são permitidas, por quem, e em qual ordem.
+O fluxo visual e as rotas de navegação já estão implementados e integrados ao sistema de login atual.
 
 ---
 
@@ -29,26 +31,41 @@ Nenhuma alteração é necessária nas tabelas ou controllers existentes. O Help
 
 ```
 login_mvc/
-├── app.py
+├── app.py                     ← Rotas de navegação (Renderização de Templates)
 ├── controllers/
-│   ├── auth_controller.py
+│   ├── auth_controller.py     ← Redirecionamento pós-login para /dashboard
 │   └── usuario_controller.py
 ├── models/
-│   ├── usuario.py
-│   ├── repositorio.py
-│   ├── chamado.py             ← novo
-│   └── chamado_repositorio.py ← novo
-├── api/
-│   ├── __init__.py            ← novo
-│   ├── v1/
-│   │   ├── __init__.py        ← novo
-│   │   ├── auth.py            ← novo (JWT login)
-│   │   ├── usuarios.py        ← novo (CRUD via API)
-│   │   └── chamados.py        ← novo (este módulo)
-└── utils/
-    ├── validacoes.py
-    └── transicoes.py          ← novo (máquina de estados)
+│   ├── repositorio.py         ← Classe RepositorioUsuarios (Existente)
+│   ├── chamado.py             ← Novo Modelo
+│   └── chamado_repositorio.py ← Novo RepositorioChamados
+├── static/
+│   ├── dashboard.css          ← Estilo do Painel KPI e Navbar
+│   └── helpdesk.css           ← Estilo dos Chamados e Badges
+├── templates/
+│   ├── base.html              ← Template Base (Navbar e Layout unificado)
+│   ├── dashboard.html         ← Painel Principal (KPIs)
+│   ├── chamados_lista.html    ← Listagem (Visual)
+│   ├── chamados_novo.html     ← Formulário de abertura
+│   └── chamados_detalhes.html ← Tela de atendimento
+└── api/                       ← Camada de Consumo (Próxima Etapa)
+    └── v1/
+        └── chamados.py        ← Endpoints JSON
 ```
+
+---
+## Navegação e Frontend
+
+As telas foram desenhadas para consumir a API de forma assíncrona (AJAX/Fetch) ou via injeção direta do Flask.
+
+### Mapeamento Tela x Endpoint
+
+| Tela | Rota Navegador | Endpoint API Correspondente |
+|---|---|---|
+| Dashboard | `/dashboard` | `GET /api/v1/usuarios/estatisticas` (proposto) |
+| Lista de Chamados | `/chamados` | `GET /api/v1/chamados` |
+| Novo Chamado | `/chamados/novo` | `POST /api/v1/chamados` |
+| Detalhes | `/chamados/<id>` | `GET /api/v1/chamados/<id>` |
 
 ---
 
@@ -56,7 +73,7 @@ login_mvc/
 
 ### Tabelas novas
 
-As tabelas abaixo se juntam à tabela `usuarios` já existente. As chaves estrangeiras referenciam o campo `cpf` da tabela `usuarios`.
+Para suportar o Helpdesk, as seguintes tabelas devem ser criadas no MySQL `login_mvc_db`:
 
 ```sql
 CREATE TABLE chamados (
@@ -187,6 +204,15 @@ def validar_transicao(status_atual, status_novo, perfil_usuario):
 ---
 
 ## Endpoints da API
+
+Os templates visuais devem ser atualizados no futuro para consumir estes endpoints:
+
+- `POST /api/v1/chamados`: Cria um chamado (Usa CPF do logado).
+- `GET /api/v1/chamados`: Retorna lista (Filtra por usuário se não for admin).
+- `PATCH /api/v1/chamados/<id>/status`: Atualiza estado e gera histórico.
+- `POST /api/v1/chamados/<id>/comentarios`: Adiciona interação.
+
+---
 
 ### Autenticação
 
